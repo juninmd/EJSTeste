@@ -1,7 +1,8 @@
-var app = require('./index');
+const app = require('./index');
+const port = process.env.PORT || 4000;
 
-var server = app.listen(4000, function () {
-    console.log('rodando');
+const server = app.listen(port, () => {
+    console.log('Server running on port ' + port);
 });
 
 module.exports = server;
