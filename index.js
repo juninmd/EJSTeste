@@ -6,6 +6,5 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
     res.render('index', { titulo: 'Funcionou' });
 });
-app.listen(4000, () => {
-    console.log("rodando");
-})
+
+module.exports = app;
