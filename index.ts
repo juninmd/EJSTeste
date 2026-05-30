@@ -8,6 +8,8 @@ app.get('/', (_req: Request, res: Response) => {
   res.render('index', { titulo: 'Funcionou' });
 });
 
-app.listen(4000, () => {
-  console.log('rodando');
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log('rodando na porta ' + PORT);
 });
