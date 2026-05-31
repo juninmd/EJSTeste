@@ -8,8 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it by opening an issue with the label `security`.
-Do **not** open a public issue for critical vulnerabilities. Instead, email the maintainers directly.
+If you discover a security vulnerability, please do **not** open a public issue. Instead, please report it privately by emailing the maintainers at [security@yourdomain.com] or by using GitHub's Private Vulnerability Reporting feature.
 
 We will acknowledge receipt within 48 hours and provide an estimated timeline for a fix.
 
