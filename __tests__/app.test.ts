@@ -1,5 +1,6 @@
-const request = require('supertest');
-const app = require('../index');
+import request from 'supertest';
+import app from '../index.js';
+import { describe, test, expect } from '@jest/globals';
 
 describe('App Unit Tests', () => {
     test('should have EJS view engine configured', () => {
