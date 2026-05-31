@@ -6,13 +6,15 @@ var rateLimit = require('express-rate-limit');
 var app = express();
 
 app.set('view engine', 'ejs');
-app.set('trust proxy', 1);
+if (process.env.TRUST_PROXY) {
+    app.set('trust proxy', process.env.TRUST_PROXY === 'true' ? 1 : process.env.TRUST_PROXY);
+}
 
 app.use(helmet());
 
 app.use(
     cors({
-        origin: process.env.CORS_ORIGIN || '*',
+        origin: process.env.CORS_ORIGIN || false,
         methods: ['GET'],
         allowedHeaders: ['Content-Type'],
         maxAge: 86400,
