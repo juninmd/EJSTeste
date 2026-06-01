@@ -1,5 +1,5 @@
-const request = require('supertest');
-const app = require('../index');
+import request from 'supertest';
+import app from '../index.js';
 
 describe('Integration Tests', () => {
     test('GET / should return status 200 with valid HTML', async () => {
