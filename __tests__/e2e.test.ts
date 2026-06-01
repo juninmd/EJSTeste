@@ -11,6 +11,7 @@ function httpGet(url: string): Promise<{ statusCode: number; data: string }> {
             res.on('end', () => {
                 resolve({ statusCode: res.statusCode ?? 0, data });
             });
+            res.on('error', reject);
         }).on('error', reject);
     });
 }
@@ -18,6 +19,7 @@ function httpGet(url: string): Promise<{ statusCode: number; data: string }> {
 function httpHead(url: string): Promise<{ statusCode: number }> {
     return new Promise((resolve, reject) => {
         const req = http.request(url, { method: 'HEAD' }, (res) => {
+            res.resume();
             resolve({ statusCode: res.statusCode ?? 0 });
         });
         req.on('error', reject);
@@ -27,7 +29,12 @@ function httpHead(url: string): Promise<{ statusCode: number }> {
 
 describe('E2E Server Tests', () => {
     afterAll(async () => {
-        await new Promise<void>((resolve) => server.close(() => resolve()));
+        await new Promise<void>((resolve, reject) => {
+            server.close((err) => {
+                if (err) reject(err);
+                else resolve();
+            });
+        });
     });
 
     test('server should be running and respond to health check', async () => {
