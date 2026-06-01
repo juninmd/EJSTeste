@@ -1,11 +1,12 @@
-var express = require('express');
-var helmet = require('helmet');
-var cors = require('cors');
-var rateLimit = require('express-rate-limit');
+import express, { type Request, type Response } from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
 
-var app = express();
+const app = express();
 
 app.set('view engine', 'ejs');
+
 if (process.env.TRUST_PROXY) {
     app.set('trust proxy', process.env.TRUST_PROXY === 'true' ? 1 : process.env.TRUST_PROXY);
 }
@@ -21,7 +22,7 @@ app.use(
     })
 );
 
-var limiter = rateLimit({
+const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
     standardHeaders: true,
@@ -32,8 +33,8 @@ app.use(limiter);
 
 app.disable('x-powered-by');
 
-app.get('/', function (req, res) {
+app.get('/', (_req: Request, res: Response) => {
     res.render('index', { titulo: 'Funcionou' });
 });
 
-module.exports = app;
+export default app;

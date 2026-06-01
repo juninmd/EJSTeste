@@ -75,17 +75,19 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Run build
+      - name: Build TypeScript
+        run: npm run build
+      - name: Package artifact
         run: |
-          mkdir -p dist
-          cp -r index.js package.json views dist/
-          cp -r node_modules dist/node_modules 2>/dev/null || true
-          echo "Build complete. Artifact size: $(du -sh dist | cut -f1)"
+          mkdir -p artifact
+          cp -r dist/* package.json views artifact/
+          cp -r node_modules artifact/node_modules 2>/dev/null || true
+          echo "Build complete. Artifact size: $(du -sh artifact | cut -f1)"
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-${{ github.sha }}
-          path: dist/
+          path: artifact/
           retention-days: 7
 
   deploy:
