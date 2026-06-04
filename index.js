@@ -498,6 +498,8 @@ app.set('trust proxy', 1);
 
 app.set('trust proxy', 1);
 
+app.set('trust proxy', 1);
+
 app.set('view engine', 'ejs');
 
 app.use(helmet());
